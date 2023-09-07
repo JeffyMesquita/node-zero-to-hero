@@ -1,0 +1,37 @@
+@baseURL = http://localhost:3333
+
+###
+POST {{baseURL}}/videos
+Content-Type: application/json
+
+{
+  "title": "Video 1",
+  "description": "Description 1",
+  "duration": 180
+}
+
+
+### Get all videos
+# @name listAll
+GET {{baseURL}}/videos
+
+### Gel with search params
+# @name listAllWithParams
+GET {{baseURL}}/videos?search=Video
+
+#### Variable Response
+@videoID = {{listAllWithParams.response.body.$.[0].id}}
+
+###
+PUT {{baseURL}}/videos/{{videoID}}
+Content-Type: application/json
+
+{
+  "title": "Video 1",
+  "description": "Description 1 updated",
+  "duration": 180
+}
+
+###
+DELETE {{baseURL}}/videos/{{videoID}}
+
